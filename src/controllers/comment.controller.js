@@ -12,15 +12,15 @@ const getVideoComments = asyncHandler(async (req, res) => {
     const options = {
         page: parseInt(page),
         limit: parseInt(limit),
-        sort: { createdAt: -1 }, 
-    
+        sort: { createdAt: -1 },
+
     }
 
 
     if (!isValidObjectId(videoId)) {
         throw new ApiError(400, "Invalid videoId")
     }
-    
+
 
     const aggregateComments = Comment.aggregate([
         {
@@ -42,32 +42,20 @@ const getVideoComments = asyncHandler(async (req, res) => {
 })
 
 const addComment = asyncHandler(async (req, res) => {
+    // TODO: add a comment to a video
     const { videoId } = req.params
-    const { content } = req.body
+    const { text } = req.body
+    const user = req.user._id
 
-    if (!isValidObjectId(videoId)) {
-        throw new ApiError(400, "Invalid videoId")
-    }
-
-    if (!content?.trim()) {
-        throw new ApiError(400, "Comment content is required")
-    }
-
-    const video = await Video.findById(videoId).select("_id")
-
-    if (!video) {
-        throw new ApiError(404, "Video not found")
-    }
-
-    const comment = await Comment.create({
-        content: content.trim(),
-        video: videoId,
-        owner: req.user._id,
+    const newComment = await Comment.create({
+        text,
+        user,
+        videoId
     })
 
     return res
         .status(201)
-        .json(new ApiResponse(201, comment, "Comment added successfully"))
+        .json(new ApiResponse(201, newComment, "Your comment is uploaded successfully"))
 })
 
 const updateComment = asyncHandler(async (req, res) => {
