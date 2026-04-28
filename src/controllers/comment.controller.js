@@ -45,12 +45,12 @@ const addComment = asyncHandler(async (req, res) => {
     // TODO: add a comment to a video
     const { videoId } = req.params
     const { text } = req.body
-    const user = req.user._id
+    const owner = req.user._id
 
     const newComment = await Comment.create({
-        text,
-        user,
-        videoId
+        content: text,
+        owner: owner,
+        video: videoId
     })
 
     return res
@@ -60,10 +60,26 @@ const addComment = asyncHandler(async (req, res) => {
 
 const updateComment = asyncHandler(async (req, res) => {
     // TODO: update a comment
+    const { commentId } = req.params
+    const { text } = req.body
+    const owner = req.user._id
+
+    const updateComment = await Comment.findOneAndUpdate({
+        $and: [{ owner: owner }, { _id: commentId }]
+    }, {
+        content: text
+    },
+        { new: true }
+    )
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, updateComment, "Your comment is updated successfully"))
 })
 
 const deleteComment = asyncHandler(async (req, res) => {
     // TODO: delete a comment
+
 })
 
 export {
