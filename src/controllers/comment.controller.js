@@ -9,6 +9,10 @@ const getVideoComments = asyncHandler(async (req, res) => {
     const { videoId } = req.params
     const { page = 1, limit = 10 } = req.query
 
+    if (!isValidObjectId(videoId)) {
+        throw new ApiError(400, "Invalid videoId")
+    }
+
     const options = {
         page: parseInt(page),
         limit: parseInt(limit),
@@ -47,6 +51,10 @@ const addComment = asyncHandler(async (req, res) => {
     const { text } = req.body
     const owner = req.user._id
 
+    if (!isValidObjectId(videoId)) {
+        throw new ApiError(400, "Invalid videoId")
+    }
+
     const newComment = await Comment.create({
         content: text,
         owner: owner,
@@ -64,6 +72,10 @@ const updateComment = asyncHandler(async (req, res) => {
     const { text } = req.body
     const owner = req.user._id
 
+    if (!isValidObjectId(commentId)) {
+        throw new ApiError(400, "Invalid commentId")
+    }
+
     const updateComment = await Comment.findOneAndUpdate({
         $and: [{ owner: owner }, { _id: commentId }]
     }, {
@@ -74,7 +86,7 @@ const updateComment = asyncHandler(async (req, res) => {
 
     console.log(updateComment)
     if (!updateComment) {
-        new ApiError(401, "User or comment id didn't match")
+        throw new ApiError(401, "User or comment id didn't match")
     }
 
     return res
@@ -86,6 +98,10 @@ const deleteComment = asyncHandler(async (req, res) => {
     // TODO: delete a comment
     const { commentId } = req.params
     const owner = req.user._id
+
+    if (!isValidObjectId(commentId)) {
+        throw new ApiError(400, "Invalid commentId")
+    }
 
     const deleteComment = await Comment.findByIdAndDelete(commentId)
 
