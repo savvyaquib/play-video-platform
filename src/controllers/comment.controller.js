@@ -72,6 +72,11 @@ const updateComment = asyncHandler(async (req, res) => {
         { new: true }
     )
 
+    console.log(updateComment)
+    if (!updateComment) {
+        new ApiError(401, "User or comment id didn't match")
+    }
+
     return res
         .status(200)
         .json(new ApiResponse(200, updateComment, "Your comment is updated successfully"))
@@ -79,7 +84,14 @@ const updateComment = asyncHandler(async (req, res) => {
 
 const deleteComment = asyncHandler(async (req, res) => {
     // TODO: delete a comment
+    const { commentId } = req.params
+    const owner = req.user._id
 
+    const deleteComment = await Comment.findByIdAndDelete(commentId)
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, deleteComment, "Your comment is deleted successfully"))
 })
 
 export {
