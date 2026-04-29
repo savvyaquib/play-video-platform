@@ -72,6 +72,10 @@ const updateComment = asyncHandler(async (req, res) => {
     const { text } = req.body
     const owner = req.user._id
 
+    if (!text) {
+        throw new ApiError(400, "Comment text is required")
+    }
+
     if (!isValidObjectId(commentId)) {
         throw new ApiError(400, "Invalid commentId")
     }
