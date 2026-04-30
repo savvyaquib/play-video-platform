@@ -33,6 +33,18 @@ const createTweet = asyncHandler(async (req, res) => {
 
 const getUserTweets = asyncHandler(async (req, res) => {
     // TODO: get user tweets
+    const { userId } = req.params
+
+    if (!isValidObjectId(userId)) {
+        throw new ApiError(401, "Invalid userId")
+    }
+
+    const userTweets = await Tweet.find({ owner: userId })
+    console.log(userTweets)
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, userTweets, "User's tweet fetched successfully"))
 })
 
 const updateTweet = asyncHandler(async (req, res) => {
