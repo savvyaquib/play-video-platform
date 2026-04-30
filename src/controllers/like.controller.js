@@ -38,7 +38,7 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
     const { commentId } = req.params
     //TODO: toggle like on comment
 
-    if (isValidObjectId(commentId)) {
+    if (!isValidObjectId(commentId)) {
         throw new ApiError(404, "CommentId is invalid")
     }
 
@@ -55,7 +55,7 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
         await Like.deleteOne({ _id: likedComment[0]._id })
         return res
             .status(200)
-            .json(new ApiResponse(200, "Unliked comment successfully"))
+            .json(new ApiResponse(200, "Comment unliked successfully"))
     }
     else {
         await Like.create({
@@ -64,8 +64,9 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
         })
         return res
             .status(200)
-            .json(new ApiResponse(200, "Liked comment successfully"))
+            .json(new ApiResponse(200, "Comment liked successfully"))
     }
+
 
 })
 
