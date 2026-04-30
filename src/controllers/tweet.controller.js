@@ -1,12 +1,34 @@
 import mongoose, { isValidObjectId } from "mongoose"
-import {Tweet} from "../models/tweet.model.js"
-import {User} from "../models/user.model.js"
-import {ApiError} from "../utils/ApiError.js"
-import {ApiResponse} from "../utils/ApiResponse.js"
-import {asyncHandler} from "../utils/asyncHandler.js"
+import { Tweet } from "../models/tweet.model.js"
+import { User } from "../models/user.model.js"
+import { ApiError } from "../utils/ApiError.js"
+import { ApiResponse } from "../utils/ApiResponse.js"
+import { asyncHandler } from "../utils/asyncHandler.js"
 
 const createTweet = asyncHandler(async (req, res) => {
     //TODO: create tweet
+    const { tweet } = req.body
+    const owner = req.user._id
+
+    if (!tweet) {
+        throw new ApiError(401, "Tweet is required")
+    }
+
+    const newTweet = await Tweet.create(
+        {
+            owner: owner,
+            tweet: tweet
+        }
+    )
+
+    if (!newTweet) {
+        throw new ApiError(401, "Something went wrong while publishing tweet")
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, newTweet, "Your tweet published successfully"))
+
 })
 
 const getUserTweets = asyncHandler(async (req, res) => {
