@@ -11,7 +11,7 @@ const createTweet = asyncHandler(async (req, res) => {
     const owner = req.user._id
 
     if (!tweet) {
-        throw new ApiError(401, "Tweet is required")
+        throw new ApiError(404, "Tweet is required")
     }
 
     const newTweet = await Tweet.create(
@@ -22,7 +22,7 @@ const createTweet = asyncHandler(async (req, res) => {
     )
 
     if (!newTweet) {
-        throw new ApiError(401, "Something went wrong while publishing tweet")
+        throw new ApiError(404, "Something went wrong while publishing tweet")
     }
 
     return res
@@ -36,7 +36,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
     const { userId } = req.params
 
     if (!isValidObjectId(userId)) {
-        throw new ApiError(401, "Invalid userId")
+        throw new ApiError(404, "Invalid userId")
     }
 
     const userTweets = await Tweet.find({ owner: userId })
@@ -72,6 +72,21 @@ const updateTweet = asyncHandler(async (req, res) => {
 
 const deleteTweet = asyncHandler(async (req, res) => {
     //TODO: delete tweet
+    const { tweetId } = req.params
+
+    if (!isValidObjectId(tweetId)) {
+        throw new ApiError(404, "Invalid tweetId")
+    }
+
+    const deletedTweet = await Tweet.findOneAndDelete({ _id: tweetId, owner: req.user._id })
+
+    if (!deletedTweet) {
+        throw new ApiError(404, "Tweet not found or you are not the owner")
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, deletedTweet, "Tweet deleted successfully"))
 })
 
 export {
