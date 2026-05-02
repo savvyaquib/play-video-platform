@@ -8,19 +8,25 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 
 const toggleSubscription = asyncHandler(async (req, res) => {
     const { channelId } = req.params
+    const subscriberId = req.user._id
     // TODO: toggle subscription
     if (!isValidObjectId(channelId)) {
         throw new ApiError(400, "Invalid channelId")
     }
 
+    if (subscriberId.toString() === channelId) {
+        throw new ApiError(400, "You cannot subscribe to yourself")
+    }
+
     const channel = await User.findById(channelId)
+
 
     if (!channel) {
         throw new ApiError(404, "Channel not found")
     }
 
     const subscription = await Subscription.findOne({
-        subscriber: req.user._id,
+        subscriber: subscriberId,
         channel: channelId
     })
 
@@ -31,7 +37,7 @@ const toggleSubscription = asyncHandler(async (req, res) => {
     } else {
         // If subscription doesn't exist, create it (subscribe)
         await Subscription.create({
-            subscriber: req.user._id,
+            subscriber: subscriberId,
             channel: channelId
         })
         return res.status(200).json(new ApiResponse(200, { subscribed: true }, "Subscribed successfully"))
@@ -73,8 +79,6 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
             }
         }
     ])
-
-    console.log(channel)
 
     if (!channel) {
         throw new ApiError(400, "This channel doesn't exist")
@@ -123,7 +127,6 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
         }
     ])
 
-    console.log(subscriber)
 
     if (!subscriber) {
         throw new ApiError(400, "This user doesn't exist")
