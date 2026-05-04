@@ -155,6 +155,32 @@ const updatePlaylist = asyncHandler(async (req, res) => {
     const { playlistId } = req.params
     const { name, description } = req.body
     //TODO: update playlist
+    if (!isValidObjectId(playlistId)) {
+        throw new ApiError(404, "Invalid playlistId")
+    }
+
+    const playlist = await Playlist.findById(playlistId)
+
+    if (!playlist) {
+        throw new ApiError(404, "Playlist not found")
+    }
+
+    if (playlist.owner.toString() !== req.user._id.toString()) {
+        throw new ApiError(403, "You are not the owner of this playlist")
+    }
+
+    if (!name && !description) {
+        throw new ApiError(400, "At least one field is required to update")
+    }
+
+    playlist.name = name || playlist.name
+    playlist.description = description || playlist.description
+
+    await playlist.save()
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, playlist, "Playlist updated successfully"))
 })
 
 export {
