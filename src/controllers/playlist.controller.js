@@ -96,7 +96,34 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
 const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
     const { playlistId, videoId } = req.params
     // TODO: remove video from playlist
+    if (!isValidObjectId(playlistId)) {
+        throw new ApiError(404, "Invalid playlistId")
+    }
 
+    if (!isValidObjectId(videoId)) {
+        throw new ApiError(404, "Invalid videoId")
+    }
+
+    const playlist = await Playlist.findById(playlistId)
+
+    if (!playlist) {
+        throw new ApiError(404, "Playlist not found")
+    }
+
+    if (playlist.owner.toString() !== req.user._id.toString()) {
+        throw new ApiError(403, "You are not the owner of this playlist")
+    }
+
+    if (!playlist.videos.includes(videoId)) {
+        throw new ApiError(400, "Video not found in the playlist")
+    }
+
+    playlist.videos.pull(videoId)
+    await playlist.save()
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, playlist, "Video removed from playlist successfully"))
 })
 
 
