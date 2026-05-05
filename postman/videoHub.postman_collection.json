@@ -1,0 +1,940 @@
+{
+  "info": {
+    "_postman_id": "c6b979db-d503-4028-9bbe-2df185929e49",
+    "name": "play-video",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46565855",
+    "_collection_link": "https://go.postman.co/collection/46565855-c6b979db-d503-4028-9bbe-2df185929e49?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "fullName",
+                  "value": "User",
+                  "type": "text",
+                  "uuid": "35155415-14f8-4217-baa2-32e32b905e54"
+                },
+                {
+                  "key": "username",
+                  "value": "user",
+                  "type": "text",
+                  "uuid": "da6f4485-c60a-49d2-9330-3475e40f9420"
+                },
+                {
+                  "key": "email",
+                  "value": "user@gmail.com",
+                  "type": "text",
+                  "uuid": "f804d612-3e88-4ad3-93d5-ec9e97feda12"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "31edaddb-2619-435b-bbe1-f173b07c9123"
+                },
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "uuid": "3fd873dc-2d2e-4949-83cc-8281b9a9a01e",
+                  "src": "/C:/Users/MOHAMMAD SAQUIB/Downloads/avatar.jpg"
+                },
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "uuid": "96adf8d7-82c2-44a2-aa35-aed3443ec0b8",
+                  "src": "/C:/Users/MOHAMMAD SAQUIB/Downloads/coverimage.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/users/register",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/login",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/users/refresh-token",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change-password",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"oldPassword\": \"password1\",\r\n    \"newPassword\": \"password\",\r\n    \"confirmedPassword\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/change-password",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "current-user",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{server}}/users/current-user",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "current-user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-account",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"fullName\": \"user\",\r\n    \"email\": \"user@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/users/update-account",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "update-account"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "channel",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/users/channel/user",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "channel",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "watch-history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/users/watch-history",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "watch-history"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-avatar",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "uuid": "3f9d4a5f-1ba6-4532-92a9-efd10e136e05",
+                  "src": "/C:/Users/MOHAMMAD SAQUIB/Downloads/Untitled design (4).png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/users/avatar",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-cover-image",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "coverImage",
+                  "type": "file",
+                  "uuid": "3f9d4a5f-1ba6-4532-92a9-efd10e136e05",
+                  "src": "/C:/Users/MOHAMMAD SAQUIB/Downloads/coverimage.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/users/cover-image",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "cover-image"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh-token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/users/refresh-token",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "users",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "video",
+      "item": [
+        {
+          "name": "upload-video",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "videoFile",
+                  "type": "file",
+                  "uuid": "42073f91-d6d5-4392-bc01-0f158a235e11",
+                  "src": "/C:/Users/MOHAMMAD SAQUIB/Downloads/New folder (30)/20260416_194749.mp4"
+                },
+                {
+                  "key": "thumbnail",
+                  "type": "file",
+                  "uuid": "adbfc367-ea49-4dc6-b798-dbe54a0b854f",
+                  "src": "/C:/Users/MOHAMMAD SAQUIB/Downloads/New folder (31)/airbnb_icon_131000.webp"
+                },
+                {
+                  "key": "title",
+                  "value": "First video",
+                  "type": "text",
+                  "uuid": "c9b7b877-613f-4638-8da6-1cee4d67482c"
+                },
+                {
+                  "key": "description",
+                  "value": "This is the very first video of the user",
+                  "type": "text",
+                  "uuid": "cf19be6f-0377-46db-85c6-cffdd6e2bf26"
+                },
+                {
+                  "key": "duration",
+                  "value": "4",
+                  "type": "text",
+                  "uuid": "228acac2-ec71-41b0-b320-8120e0a0bbca"
+                },
+                {
+                  "key": "views",
+                  "value": "12",
+                  "type": "text",
+                  "uuid": "46685fbe-1f3c-43fe-9975-14cdfe48eee4"
+                },
+                {
+                  "key": "isPublished",
+                  "value": "true",
+                  "type": "text",
+                  "uuid": "81138c0c-b850-4301-b45e-a779b773cfcd"
+                },
+                {
+                  "key": "owner",
+                  "value": "69cbab491d3b30a24585b214",
+                  "type": "text",
+                  "uuid": "8c320612-b4b4-480f-97f6-abf66b127db8"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/videos",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-videos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/videos?userId=69e47b13d0bea2c8a229f719",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "69e47b13d0bea2c8a229f719"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-a-video",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "update-video",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/videos/69e47b99d0bea2c8a229f728",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos",
+                "69e47b99d0bea2c8a229f728"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-video",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/videos/69e47b99d0bea2c8a229f728",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "videos",
+                "69e47b99d0bea2c8a229f728"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "toggle-publish",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subscription",
+      "item": [
+        {
+          "name": "toggle-subscription",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/subscriptions/channel/",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "subscriptions",
+                "channel",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-user-subscriber",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "get-subscribed-channels",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "LIke",
+      "item": [
+        {
+          "name": "toggle-video-like",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/likes/toggle/v/69e8167e1e98efd76aa32f5a",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "likes",
+                "toggle",
+                "v",
+                "69e8167e1e98efd76aa32f5a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-liked-videos",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "toggle-comment-like",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/likes/toggle/c/69f003708313044c25cfe676",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "likes",
+                "toggle",
+                "c",
+                "69f003708313044c25cfe676"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comment",
+      "item": [
+        {
+          "name": "get-video-comment",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"password\"\r\n}"
+            },
+            "url": {
+              "raw": "{{server}}/comments/69e47ba8d0bea2c8a229f72d",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "comments",
+                "69e47ba8d0bea2c8a229f72d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add-comment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"text\": \"Hey, there! This is my first comment\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/comments/69e47ba8d0bea2c8a229f72d",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "comments",
+                "69e47ba8d0bea2c8a229f72d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-comment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"text\": \"This comment is updated\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/comments/c/69e47ba8d0bea2c8a229f72d",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "comments",
+                "c",
+                "69e47ba8d0bea2c8a229f72d"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tweet",
+      "item": [
+        {
+          "name": "create-tweet",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"tweet\": \"This is my first tweet\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{server}}/tweets",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "tweets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-user-tweets",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "update-tweet",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/tweets/69f30374c2828bde948cffff",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "tweets",
+                "69f30374c2828bde948cffff"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-tweet",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/tweets/69f30374c2828bde948cffff",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "tweets",
+                "69f30374c2828bde948cffff"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "get-stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/dashboard/stats",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "dashboard",
+                "stats"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-videos",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Playlist",
+      "item": [
+        {
+          "name": "create-playlist",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "First playlist",
+                  "type": "text",
+                  "uuid": "902c569a-f131-4cb5-8777-f276bc7095af"
+                },
+                {
+                  "key": "description",
+                  "value": "This is first playlist created for route testing ",
+                  "type": "text",
+                  "uuid": "e259be9c-48f7-4404-aeff-cef0d366f36e"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{server}}/playlists",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlists"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-playlists",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "add-video",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/playlists/add/69e8174f1e98efd76aa32f6d/69f6ca9841b15ea7b4925ee8",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlists",
+                "add",
+                "69e8174f1e98efd76aa32f6d",
+                "69f6ca9841b15ea7b4925ee8"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "remove-video",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/playlists/remove/69e8167e1e98efd76aa32f5a/69f6ca9841b15ea7b4925ee8",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlists",
+                "remove",
+                "69e8167e1e98efd76aa32f5a",
+                "69f6ca9841b15ea7b4925ee8"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-playlist",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/playlists/69f6ca9841b15ea7b4925ee8",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "playlists",
+                "69f6ca9841b15ea7b4925ee8"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-playlist-byId",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "update-playlist",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Healthcheck",
+      "item": [
+        {
+          "name": "health-check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{server}}/health",
+              "host": [
+                "{{server}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "server",
+      "value": ""
+    }
+  ]
+}
