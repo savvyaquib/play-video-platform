@@ -23,6 +23,7 @@ import commentRouter from "./routes/comment.route.js"
 import tweetRouter from "./routes/tweet.route.js"
 import dashboardRouter from "./routes/dashboard.route.js"
 import playlistRouter from "./routes/playlist.route.js"
+import healthCheckRouter from "./routes/healthCheck.route.js"
 
 // routes declaration
 app.use("/api/v1/users", userRouter)
