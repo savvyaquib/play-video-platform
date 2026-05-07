@@ -11,8 +11,15 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.5",
+    "@faker-js/faker": "^10.4.0",
+    "babel-jest": "^30.3.0",
+    "jest": "^30.3.0",
+    "mongodb-memory-server": "^11.1.0",
     "nodemon": "^3.1.14",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "supertest": "^7.2.2"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
